@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text } from 'react-native';
 
 import { Background,
@@ -13,10 +13,13 @@ import { AuthContext } from '../../contexts/auth';
 
 function SignUp(){
 
-  const { user } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function handleSignUp(){
-    console.log(user.name)
+    signUp(email, password, nome);
   }
 
   return(
@@ -30,18 +33,25 @@ function SignUp(){
         <AreaInput>
           <Input
             placeholder="Nome"
+            value={nome}
+            onChangeText={(text) => setNome(text)}
           />
         </AreaInput>
 
         <AreaInput>
           <Input
             placeholder="E-mail"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
           />
         </AreaInput>
 
         <AreaInput>
           <Input
             placeholder="Sua senha"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            secureTextEntry={true}
           />
         </AreaInput>
 
